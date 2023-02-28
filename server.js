@@ -14,8 +14,8 @@ var employee_tracker = function () {
         // Begin Command Line
         type: 'list',
         name: 'prompt',
-        message: 'What would you like to do?',
-        choices: ['View All Department', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Log Out']
+        message: 'Please enter the option?',
+        choices: ['View All Department', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Exit']
     }]).then((answers) => {
         // Views the Department Table in the Database
         if (answers.prompt === 'View All Department') {
@@ -44,7 +44,7 @@ var employee_tracker = function () {
                 // Adding a Department
                 type: 'input',
                 name: 'department',
-                message: 'What is the name of the dpeartment?',
+                message: 'What is the name of the department?',
                 validate: departmentInput => {
                     if (departmentInput) {
                         return true;
@@ -256,7 +256,7 @@ var employee_tracker = function () {
             });
         } else if (answers.prompt === 'Exit') {
             db.end();
-            console.log("Good-Bye!");
+            console.log("Exit!");
         }
     })
 };
