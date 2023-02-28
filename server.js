@@ -85,9 +85,6 @@ function promptUser() {
             case "View employees by manager":
                 viewEmployeesByManager();
                 break;
-            case "View total budget by Department":
-                viewTotalBudgetByDepartment();
-                break;
             case "Exit":
                 connection.end();
                 break;
@@ -293,16 +290,6 @@ function viewEmployeesByManager() {
     connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, CONCAT(manager.first_name, ' ', manager.last_name) AS manager, department.name AS department, role.salary FROM employeesDB.employee JOIN role on employee.role_id = role.id JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;", (err, res) => {
         if (err) throw err;
         console.log("\n");
-        console.table(res);
-        promptUser();
-    });
-}
-
-//View utilized budget by department
-function viewTotalBudgetByDepartment() {
-    console.log(`Viewing Budget by departments`);
-    connection.query("SELECT department.id, department.name, SUM(role.salary) AS Utilized_Budget FROM employee JOIN role on employee.role_id = role.id JOIN department on role.department_id = department.id GROUP BY department.id", (err, res) => {
-        if (err) throw err;
         console.table(res);
         promptUser();
     });
